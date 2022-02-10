@@ -1,0 +1,41 @@
+
+
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a th:class="'nav-link'+${i}" aria-current="page" href="/add">Добавить</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="'nav-link'+${h}" href="/">Блог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="'nav-link'+${a}" href="/about">О нас!</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:if="${isAdmin}" th:class="nav-link" href="/user/list">Список user</a>
+                    </li>
+                </ul>
+                <form class="d-flex  me-1" method="get" th:action="@{/(search=${search})}">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                           name="search" th:value="${search}">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <div >
+                        <div class="navbar-nav me-2" th:if="${user!=null}">
+                            <a  class="nav-link active" href="/user/show" th:text="${user.name}">user</a>
+                            <a  class="btn btn-outline-success" href="/logout" >Sign out!</a>
+                        </div>
+                        <div class="navbar-nav me-2" th:if="${user==null}">
+                            <a  class="nav-link active" href="/user/add">Registration</a>
+                            <a  class="btn btn-outline-success" href="/login" >Sign in!</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
